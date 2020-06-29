@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <title>IMDB</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/show.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<style media="screen">
+  .pd {
+    padding: 10px;
+  }
+
+  .m {
+    padding: 15px;
+  }
+</style>
+
+<body style="background:black;color:white;">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg  bg-custom">
+    <a class="navbar-brand " href="#" style="">IMDB</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+
+      <ul class="navbar-nav ml-auto" style="width:100%;">
+        <li class="nav-item active">
+          <a class="nav-link" href="/" style="">Home <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="/signin">Sign In</a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="/seewatchlist">Watchlist</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Profile
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/profile">Go to profile</a>
+            <a class="dropdown-item" href="/logout">Logout</a>
+          </div>
+        </li>
+      </ul>
+      <form class="my-2 my-lg-0" style="display:flex;width:100%;" action="search" method="post">
+        <input class="form-control mr-sm-2" style=""type="search" placeholder="Search for a movie/show" aria-label="Search" name="movieName">
+        <button class="btn btn-outline-success mr-sm-2" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+
+  <!-- <link rel="stylesheet" href="css/show.css"> -->
+    <div class="container">
+
+    <h1>Game of Thrones</h1>
+
+    <div class=" grid">
+        <div class="poster">
+          <img src=" https://m.media-amazon.com/images/M/MV5BYTRiNDQwYzAtMzVlZS00NTI5LWJjYjUtMzkwNTUzMWMxZTllXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_.jpg" class = "img-poster" alt="No image">
+          <style media="screen">
+            .img-poster2{
+              width: 100%;
+              transition: 1s;
+              transform: scale(1.05);
+              /* object-fit:fill; */
+            }
+          </style>
+          <script type="text/javascript">
+            $('.img-poster').hover(function(){
+              $(this).addClass('img-poster2')
+            },function(){
+              $(this).removeClass('img-poster2')
+            });
+
+          </script>
+
+        </div>
+
+        <div class="nested">
+          <div class="nested-item">
+            9.3
+          </div>
+          <div class="nested-item">
+            Action,Adventure,Drama,Fantasy,Romance
+          </div>
+          <div class="nested-item">
+            tvSeries(2011)
+          </div>
+        </div>
+    </div>
+    <p>Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.</p>
+
+    
+
+      
+      <p>Creators :
+        
+          
+          David Benioff
+          
+        
+          
+            ,
+          
+          D.B. Weiss
+          
+        
+      </p>
+
+
+
+
+
+    
+
+    <!-- watchlist button -->
+    <form class="" action="/updateWatchlist" method="post">
+      <input type="text" name="titleId" value="tt0944947" style="display:none;">
+      <input type="text" name="title" value="Game of Thrones" style="display:none;">
+      <input type="number" name="rating" value="9.3" style="display:none;">
+      <input type="text" name="url" value="https://m.media-amazon.com/images/M/MV5BYTRiNDQwYzAtMzVlZS00NTI5LWJjYjUtMzkwNTUzMWMxZTllXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_.jpg" style="display:none;">
+      <input type="text" name="synopsis" value="Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia." style="display:none;">
+      <button type="submit" name="button" class="btn btn-primary"><b>+ </b>Add to watchlist</button>
+    </form>
+
+    <h2>Summary</h2>
+    <p>In the mythical continent of Westeros, several powerful families fight for control of the Seven Kingdoms. As conflict erupts in the kingdoms of men, an ancient enemy rises once again to threaten them all. Meanwhile, the last heirs of a recently usurped dynasty plot to take back their homeland from across the Narrow Sea.
+
+
+    </p>
+
+
+    <h2>User Reviews</h2>
+    
+
+    
+      <h4 >A perfect example of: Falling in Love for the Wrong Guy</h4>
+      <p>By  on 2019-05-25</p>
+      <p>It was a master piece. It was written to the perfection. It was mesmerizing. It was gripping. It was so shocking that if someone is binge watching this show he/she will need a time-off in between to get their head around things and accept some messed up, yet mind blowing development.
+
+But yet, I cant hate it enough after final season. Its like you came to know that you were in love with the wrong one all along. It was like looking at a completely different person. It was like seeing your own dre<a href = "#p0" id="0"><i>.....Read more</i></a><span style ="display : none;" id = "p0">ams and expectations get destroyed. It was not a let down, it was a BETRAYAL!</span>
+        
+      </p>
+
+      <script type="text/javascript">
+        $("#0").click(function(){
+          console.log('asdafa');
+          $("#p0").show();
+          $("#0").hide();
+        })
+      </script>
+    
+      <h4 >Seasons 1-6: outstanding. 7: daft but good. 8: disappointing</h4>
+      <p>By  on 2019-05-21</p>
+      <p>Let&#39;s say you&#39;re reading these reviews and haven&#39;t watched GoT yet, but now that it&#39;s finished are considering the marathon. What&#39;s the consensus? In this case, the consensus is accurate, and that is:
+
+Seasons 1-6: outstanding. Deep world-building, intelligent dialogue, epic set-pieces worthy of Hollywood, expert acting, detailed plotting, genuine surprises, great soundtrack used sparingly. GoT is worth watching for these seasons, definitely.
+
+Season 7: you suddenly notice the writing and plotti<a href = "#p1" id="1"><i>.....Read more</i></a><span style ="display : none;" id = "p1">ng has taken a sharp dive downwards in quality. There are inexplicable ideas, inconsistent characterisation and soap-opera dramas. But at least the entertainment value is still very high, so it gets a pass.
+
+Season 8: this drop chasms down to depths you didn&#39;t think possible. The writing has got so amateurish that the still-fantastic production values are no longer enough to save it. If you ever enjoyed Lost but were amazed at how bad the final season was, you&#39;re in familiar territory here.
+
+The biggest problem with the final season was it took us out of the story and got us thinking about its many weaknesses. We lost our suspension of disbelief. Fatal for fiction. It also ruined the series-arcs to the point where a rewatch of the entire series is pointless.
+
+So can I recommend a GoT marathon for newcomers? Yes, the first 6 seasons are worth the disappointments later on. But best series of all time it is not. It could&#39;ve been, but dropping the ball in the final stretch puts it behind the following superior series more worthy of your marathon:
+
+
+* Battlestar Galactica (2003-2008)
+* Twin Peaks (all 3 seasons, plus the movie)
+* Breaking Bad
+</span>
+        
+      </p>
+
+      <script type="text/javascript">
+        $("#1").click(function(){
+          console.log('asdafa');
+          $("#p1").show();
+          $("#1").hide();
+        })
+      </script>
+    
+    
+
+
+
+    <h3>comments</h3>
+    
+
+    <ul id= "comments-section">
+
+    
+
+    </ul>
+
+    <script type="text/javascript">
+      //script for upvotes
+      $(function(){
+        var socket = io();
+        $('.upvote').click(function(e){
+          e.preventDefault();
+          var commentId = $(this).attr('name');
+          console.log(commentId);
+          if("false" == "false"){ //checking if user is logged in or not
+            $(this).text("login first");
+          }else{
+            if($(this).val()=="liked"){ //checking if the post is already liked by the current user
+              $(this).text("already liked");
+              socket.emit("downvote",{commentId : commentId,username : ""});//if liked then downvote it
+            }else{
+              socket.emit("upvote",{commentId : commentId,username : ""});//if not liked then upvote it
+            }
+          }
+        });
+
+        socket.on("upvote",function(comment){
+          $('[name = '+comment.commentId+']').val('liked').text('downvote'); //changing notliked value(upvote) to liked value(downvote)
+        })
+
+        socket.on("downvote",function(comment){
+          $('[name = '+comment.commentId+']').val('notliked').text('upvote');//vice versa
+        })
+
+      });
+    </script>
+
+
+    <script>
+
+        //Script For new Comments
+        $(function () {
+        var socket = io();
+        $('.comment-send').submit(function(e) {
+          e.preventDefault(); // prevents page reloading
+          socket.emit('new comment',{titleId :"tt0944947",body : $('#commentBody').val(),username :"",auth :"false"});
+          $('#commentBody').val('');
+        })
+
+        socket.on("comment added",function(newComment){ //after the comment is added we need to render it also
+          $("#comments-section").append($('<li class="comment-section">').html('<div ><img class="display-pic" src="https://api.adorable.io/avatars/285/newComment.username.png" alt="" height="60" width="60"></div><div class=""><strong>' + newComment.username + '</strong> <i>' + newComment.date + '</i><p>'+ newComment.body +'</p><button type="submit" class="upvote" name='+newComment._id+' value="liked">upvote</button>'))
+        })
+        socket.on("comment failed",function(){//in case the comment is not updated or the user is not loggeg in or authorised
+          $("#comments-section").append('nooooooo');
+        })
+      });
+
+    </script>
+
+
+    <form class="comment-send" action="" >
+
+      <input type="hidden" name="titleId" value= "tt0944947">
+      <input id = "commentBody" type="text" name="body" placeholder="Join the Discussion">
+      <button type="submit" name="button">Submit</button>
+    </form>
+    </div>
+
+
+<div class="footer" align="center">
+  <a href="/developers" style="color:white;"><p>About developers</p></a>
+  <a href="/feedback" style="color:white;"><p>Feedback</p></a>
+  <footer align="center" style="color:white;">
+    © 2020-2021 by The WebD Guys,Inc.
+  </footer>
+
+</div>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
