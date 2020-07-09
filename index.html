@@ -7,7 +7,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <title>FlickFindr-r</title>
   <!-- google fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap" rel="stylesheet"> -->
+
+  <!-- json.heading -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+
+  <!-- FlickFinder-r -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Monoton&display=swap" rel="stylesheet">
+
+  <!-- #hindi span -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Kalam&family=Monoton&display=swap" rel="stylesheet">
+
+  <!-- hollywood -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Khula&family=Monoton&family=MuseoModerno:wght@300&display=swap" rel="stylesheet">
   <!--Fontawesome CDN-->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" href="frontend.css">
@@ -29,7 +41,7 @@
   #custom-nav {
     position: fixed;
     z-index: 10;
-    background-color: black;
+    background-color: rgba(0,0,0,0.75);
     width: 100%;
     top: 0;
   }
@@ -59,7 +71,16 @@
 <body>
 
   <!-- Navbar -->
+  <div class="background-op">
+
+
   <nav class="navbar navbar-expand-lg" id="custom-nav">
+    <style media="screen">
+      .navbar-brand{
+        font-family: 'Caveat', cursive;
+        font-family: 'Monoton', cursive;
+      }
+    </style>
     <a class="navbar-brand" href="/">flickFindr-r</a>
     <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -72,14 +93,20 @@
         </li>
 
         
-        <li class="nav-item active">
-          <a class="nav-link" href="/signin">Sign In</a>
-        </li>
-        
 
 
         <li class="nav-item active">
           <a class="nav-link" href="/seewatchlist">Watchlist</a>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            My Profile
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/profile"> RJ Rachit <img class="display-pic" src="https://api.adorable.io/avatars/285/RJ Rachit.png" style="position:absolute;right:10%" alt="" height="25" width="25"></a>
+            <a class="dropdown-item" href="/logout">Logout</a>
+          </div>
         </li>
         
 
@@ -89,11 +116,9 @@
         <button class="btn btn-warning mr-sm-2" style="margin-left:2px;" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> </button>
       </form>
     </div>
-  </nav>
-  <div class="nav-border">
 
+  </nav>
   </div>
-<hr><hr>
 
 <!-- Carousel -->
 <div class="">
@@ -170,9 +195,9 @@
     }
 </style>
 
-
+<hr>
 <!-- bootstrap grid featured movies-->
-<h1 align="center">Featured Movies</h1>
+<h1 align="center">Top <span id="hollywood"> HOLLYWOOD</span></h1>
 <div class="container-fluid">
   <div class="row pd">
 
@@ -247,7 +272,7 @@
     console.log(json);
     $("#featured-cover").html("<a href='show/"+json.id+"'><img class='covering' src=" + json.title.image.cover + "></a>");
     $("#trailer").html('<iframe src="'+json.trailer+'" align="center" frameborder="0"></iframe>');
-    $("#cover-heading").html('<p>'+json.heading+'</p>');
+    $("#cover-heading").html('<p>"'+json.heading+'"</p>');
     // $(".head").html("<a href=show/" + json.id + "><img class='covering' src=" + json.title.image.cover + " height='' width=''></a><p id='heading' >" + '"' + json.heading + '"' + "</p>");
     // $(".poster").html("<img class = 'img-poster' src="+json.title.image.url+">");
     // $(".weeknested").html("")
@@ -298,8 +323,10 @@
 
 </script>
 
+<hr>
 <!-- bootstrap grid Hindi movies-->
-<h1 align="center">Top Hindi Movies</h1>
+<h1  align="center">Top <span id="hindi"> बॉलीवुड </span></h1>
+
 <div class="container-fluid">
   <div class="row pd">
 
