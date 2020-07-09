@@ -43,7 +43,7 @@
   visibility: hidden;
   position: absolute;
   width: 85%;
-  font-size: 2.1vw;
+  font-size: 2.8vw;
   color:white;
   left: 50% ;
   top: 50% ;
@@ -74,7 +74,9 @@
 img{
   transition: 2s;
 }
-
+#cover-heading p{
+  font-family: 'Caveat', cursive;
+}
  @keyframes slidein {
   from {
     left: 200%;
