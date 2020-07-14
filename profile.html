@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <title>FlickFindr-r</title>
+  <!-- google fonts -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap" rel="stylesheet"> -->
+
+  <!-- json.heading -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+
+  <!-- FlickFinder-r -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Monoton&display=swap" rel="stylesheet">
+
+  <!-- #hindi span -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Kalam&family=Monoton&display=swap" rel="stylesheet">
+
+  <!-- hollywood -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Khula&family=Monoton&family=MuseoModerno:wght@300&display=swap" rel="stylesheet">
+  <!--Fontawesome CDN-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/frontend.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/show.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<style media="screen">
+  .pd {
+    padding: 10px;
+  }
+
+  .m {
+    padding: 15px;
+  }
+
+  #custom-nav {
+    position: fixed;
+    z-index: 10;
+    background-color: rgba(0,0,0,1);
+    width: 100%;
+    top: 0;
+  }
+
+  #custom-nav a:hover {
+    text-decoration: none !important;
+    transform: scale(1.015);
+    transition: transform 1s;
+    opacity: 0.915;
+  }
+
+  #custom-nav a.dropdown-item:hover{
+    transform: none;
+  }
+
+  #custom-nav .navbar-brand {
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  .custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(254,255,170)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+</style>
+
+<body>
+
+  <!-- Navbar -->
+
+
+  <nav class="navbar navbar-expand-lg" id="custom-nav">
+    <style media="screen">
+      .navbar-brand{
+        font-family: 'Caveat', cursive;
+        font-family: 'Monoton', cursive;
+      }
+    </style>
+    <a class="navbar-brand" href="/">flickFindrr</a>
+    <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto" style="width:100%;">
+        <li class="nav-item active">
+          <a class="nav-link" href="/" style="">Home <span class="sr-only">(current)</span></a>
+        </li>
+
+        
+
+
+        <li class="nav-item active">
+          <a class="nav-link" href="/seewatchlist">Watchlist</a>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            My Profile
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/profile"> popa <img class="display-pic" src="https://api.adorable.io/avatars/285/chaitanya sonkaria.png" style="position:absolute;right:10%" alt="" height="25" width="25"></a>
+            <a class="dropdown-item" href="/logout">Logout</a>
+          </div>
+        </li>
+        
+
+      </ul>
+      <form class="my-2 my-lg-0" style="display:flex;width:100%;" action="search" method="post">
+        <input class="form-control mr-sm-2" style=""type="search" placeholder="Search Your Flick" aria-label="Search" name="movieName">
+        <button class="btn btn-warning mr-sm-2" style="margin-left:2px;" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+      </form>
+    </div>
+
+  </nav>
+
+  <hr><hr>
+  <div id="page-container">
+<style media="screen">
+  .profile-input {
+    margin-top: 15px;
+    display: block;
+
+    border-radius: 5px;
+    border-width: 0px;
+  }
+
+
+
+  section button {
+    margin-top: 1%;
+  }
+
+  section .dp {
+    border-radius: 100%;
+  }
+
+  .black {
+    color: black !important;
+  }
+
+  .set-position {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 0.8fr;
+  }
+
+  a:hover {
+    cursor: pointer;
+  }
+</style>
+
+<section style="background:white;color:black;padding:2%;">
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-6 col-md-6 col-lg-6 col-sm-6 col-12" align="center">
+        <img class="dp" style="width:50%" src="https://api.adorable.io/avatars/285/chaitanya sonkaria.png" alt="" >
+
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-12 set-position" style="background:#f7f7f7;color:black;padding:2%;border-radius:2%;">
+
+        <div class="">
+          <button type="button" class="btn" name="button"><h5>Username : <strong>popa</strong></h5></button>
+        </div>
+        <div class="">
+          <button type="button" class="btn" name="button"><h5>First Name: <strong>chaitanya</strong></h5></button>
+        </div>
+        <div class="">
+          <button type="button" class="btn" name="button"><h5>Last Name: <strong>sonkaria</strong></h5></button>
+        </div>
+        <div class="">
+          <a href="/seewatchlist" style="width:100%"><button type="button" class="btn btn-warning" style="width:100%" name="button">See Your Watchlist!</button></a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+<section style="background:#f7f7f7;color:black;padding:2%;">
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+        <div class=" ">
+
+              <p>Change First and Last name:</p>
+
+
+            <div style="margin-bottom:9px;">
+              <form class=" form-first-last" action="/changeSettings" method="post">
+                <input class="form-control profile-input" type="text" name="firstName"  placeholder="First Name" required>
+                <input class="form-control profile-input" type="text" name="lastName"  placeholder="Last Name">
+                <button type="submit" class="btn btn-warning" name="button">Confirm</button>
+              </form>
+            </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+            <p>Change Password:</p>
+        <div style="margin-bottom:9px;">
+            <form class="form-pass " action="/changePassword" method="post">
+              <input class="form-control profile-input" type="password" name="newPass" placeholder="New Password" required>
+              <input class="form-control profile-input" type="password" name="confirmed" placeholder="Confirm Password" required>
+              <button type="submit" class="btn btn-warning" name="button">Confirm </button>
+            </form>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<script type="text/javascript">
+  $(".change-pass").click(() => {
+    $(".form-pass").toggleClass("hide");
+  })
+
+  $(".change-first-last").click(() => {
+    $(".form-first-last").toggleClass("hide");
+  })
+
+  $(".settings").click(() => {
+    $(".setting-links").toggleClass("hide");
+    $(".setting-links-custom").toggleClass("hide")
+  })
+</script>
+
+
+
+</div>
+
+<div class="footer" style="background:black;" style="position:absolute;bottom:0px;" align="center">
+  <div class="" style="padding:15px;">
+    <a style="" href="/developers" style="color:white;"><p> <b>About Developers</b> </p></a>
+    <a href="/feedback" style="color:white;"><p> <b>Feedback</b></p></a>
+    <footer align="center" style="color:#ffcd3c;">
+      © 2020-2021 by The WebD Guys,Inc.
+    </footer>
+  </div>
+
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
